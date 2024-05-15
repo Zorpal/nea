@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import api from "../api"
-
+import Details from "../components/Details"
+import "../styles/Home.css"
 
 function Home() {
     const [userDetails, setUserDetails] = useState([]);
@@ -11,7 +12,7 @@ function Home() {
 
     useEffect(() => {
         getUserDetails();
-    }, [])
+    }, []);
 
     const getUserDetails = () => {
         api
@@ -45,6 +46,9 @@ function Home() {
         <div>
             <div>
                 <h2>Client Details</h2>
+                {userDetails.map((details) => (
+                    <Details details={details} onDelete={deleteUserDetails} key={details.id} />
+                ))}
             </div>
             <h2>Update Client Details</h2>
             <form onSubmit={createUserDetails}>
